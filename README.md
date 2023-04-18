@@ -3,7 +3,6 @@
 
 # how to create localhost database in postgres
 
-
 create table usuarios (
 	codigo serial primary key, 
 	nome varchar(20) not null, 
@@ -11,13 +10,10 @@ create table usuarios (
 	fotoPerfil varchar(500) null 	
 );
 
--- inserindo registros na tabela prédios
 insert into usuarios (nome, senha) 
 values ('admin', 'admin')
 returning codigo, nome, senha;
 
-
--- criação da tabela salas
 create table publicacoes (
 	codigo serial primary key, 
 	imagem varchar(500) not null, 
@@ -26,7 +22,6 @@ create table publicacoes (
 	foreign key (usuario) references usuarios (codigo)
 );
 
--- inserindo alguns registros na tabela salas
 insert into publicacoes (imagem, descricao, usuario) 
 values ('imagem', 'teste', 1)
 returning codigo, imagem, descricao, usuario;
