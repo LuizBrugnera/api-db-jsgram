@@ -14,7 +14,7 @@ if (isProduction) {
     user: 'postgres',
     host: 'localhost',
     database: 'insta-db',
-    password: 'postgres',
+    password: '123456',
     port: 5432
   })
 }

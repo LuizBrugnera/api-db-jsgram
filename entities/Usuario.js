@@ -1,9 +1,9 @@
 class Usuario {
-    constructor(codigo, nome, senha, fotoPerfil) {
+    constructor(codigo, nome, senha, fotoperfil) {
         this.codigo = codigo;
         this.nome = nome;
         this.senha = senha;
-        this.fotoPerfil = fotoPerfil;
+        this.fotoperfil = fotoperfil;
     }
 }
 

@@ -4,7 +4,7 @@ const Usuario = require('../entities/Usuario')
 const getUsuariosDB = async () => {
     try {    
         const { rows } = await pool.query('SELECT * FROM usuarios order by codigo');
-        return rows.map((usuario) => new Usuario(usuario.codigo, usuario.nome, usuario.senha, usuario.fotoPerfil));        
+        return rows.map((usuario) => new Usuario(usuario.codigo, usuario.nome, usuario.senha, usuario.fotoperfil));        
     } catch (err) {
         throw "Erro : " + err;
     }
@@ -12,12 +12,12 @@ const getUsuariosDB = async () => {
 
 const addUsuarioDB = async (body) => {
     try {   
-        const { nome, senha, fotoPerfil } = body; 
-        const results = await pool.query(`INSERT INTO usuarios (nome, senha, fotoPerfil) 
-        values ($1, $2, $3) returning codigo, nome, senha, fotoPerfil`,
-        [nome, senha, fotoPerfil]);
+        const { nome, senha, fotoperfil } = body; 
+        const results = await pool.query(`INSERT INTO usuarios (nome, senha, fotoperfil) 
+        values ($1, $2, $3) returning codigo, nome, senha, fotoperfil`,
+        [nome, senha, fotoperfil]);
         const usuario = results.rows[0];
-        return new Usuario(usuario.codigo, usuario.nome, usuario.senha, usuario.fotoPerfil);
+        return new Usuario(usuario.codigo, usuario.nome, usuario.senha, usuario.fotoperfil);
     } catch (err) {
         throw "Erro ao inserir o usuário: " + err;
     }    
@@ -26,15 +26,15 @@ const addUsuarioDB = async (body) => {
 
 const updateUsuarioDB = async (body) => {
     try {   
-        const { codigo, nome, senha, fotoPerfil }  = body; 
-        const results = await pool.query(`UPDATE usuarios SET nome=$2, senha=$3, fotoPerfil=$4
-        where codigo=$1 returning codigo, nome, senha, fotoPerfil`,
-        [codigo, nome, senha, fotoPerfil]);        
+        const { codigo, nome, senha, fotoperfil }  = body; 
+        const results = await pool.query(`UPDATE usuarios SET nome=$2, senha=$3, fotoperfil=$4
+        where codigo=$1 returning codigo, nome, senha, fotoperfil`,
+        [codigo, nome, senha, fotoperfil]);        
         if (results.rowCount == 0){
             throw `Nenhum registro encontrado com o código ${codigo} para ser alterado`;
         }
         const usuario = results.rows[0];
-        return new Usuario(usuario.codigo, usuario.nome, usuario.senha, usuario.fotoPerfil);
+        return new Usuario(usuario.codigo, usuario.nome, usuario.senha, usuario.fotoperfil);
     } catch (err) {
         throw "Erro ao alterar o usuário: " + err;
     }      
@@ -47,7 +47,7 @@ const deleteUsuarioDB = async (codigo) => {
         if (results.rowCount == 0){
             throw `Nenhum registro encontrado com o código ${codigo} para ser removido`;
         } else {
-            return "Prédio removido com sucesso";
+            return "Usuário removido com sucesso";
         }       
     } catch (err) {
         throw "Erro ao remover o usuário: " + err;
@@ -62,7 +62,7 @@ const getUsuarioPorCodigoDB = async (codigo) => {
             throw "Nenhum registro encontrado com o código: " + codigo;
         } else {
             const usuario = results.rows[0];
-            return new Usuario(usuario.codigo, usuario.nome, usuario.senha, usuario.fotoPerfil);            
+            return new Usuario(usuario.codigo, usuario.nome, usuario.senha, usuario.fotoperfil);            
         }       
     } catch (err) {
         throw "Erro ao recuperar o usuário: " + err;
