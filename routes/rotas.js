@@ -7,24 +7,24 @@ const publicacoesController = require("../controllers/PublicacoesController");
 const rotas = new Router();
 
 rotas
-  .route("/usuarios")
+  .route("/users")
   .get(usuariosController.getUsuarios)
   .post(usuariosController.addUsuario)
   .put(usuariosController.updateUsuario);
 
 rotas
-  .route("/usuarios/:codigo")
+  .route("/users/:codigo")
   .get(usuariosController.getUsuarioPorCodigo)
   .delete(usuariosController.deleteUsuario);
 
 rotas
-  .route("/publicacoes")
+  .route("/posts")
   .get(publicacoesController.getPublicacoes)
   .post(publicacoesController.addPublicacao)
   .put(publicacoesController.updatePublicacao);
 
 rotas
-  .route("/publicacoes/:codigo")
+  .route("/posts/:codigo")
   .get(publicacoesController.getPublicacaoPorCodigo)
   .delete(publicacoesController.deletePublicacao);
 
